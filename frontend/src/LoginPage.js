@@ -49,10 +49,7 @@ class LoginPage extends Component {
           />
         </div>
         <div>
-          <Button variant="contained" color="primary" onClick={() => {
-            fetch(window.location.host + "/login")
-            .then(response => {console.log(response)})
-          }}>
+          <Button variant="contained" color="primary" onClick={this.props.handler}>
             Login
           </Button>
         </div>

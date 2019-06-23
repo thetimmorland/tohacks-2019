@@ -7,10 +7,24 @@ import Profile from "./Profile.js";
 import TopBar from "./TopBar.js";
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      loggedIn: false,
+      showRegistration: false,
+    }
+  }
+
+  handleLogin = () => {
+    this.setState({loggedIn: true})
+  }
+
   render() {
     return (
       <div className="App">
-        <LoginPage/>
+        {
+          this.state.loggedIn ? <Home /> : <LoginPage handler={this.handleLogin} />
+        }
       </div> 
     );
   }
