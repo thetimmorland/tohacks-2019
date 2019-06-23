@@ -35,6 +35,12 @@ app.get('/api/posting', function (req, res) {
     res.send('test posting creation')
 })
 
+const Job = require('./models/job').Job
+Job.sync()
+app.get('/api/jobs', function (req, res) {
+    res.send('test job creation')
+})
+
 // Serve static Frontend dashboard
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', function (req, res) { // * character allows for internal routing in our frontend
