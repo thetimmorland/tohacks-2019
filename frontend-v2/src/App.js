@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Link } from '@material-ui/core';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        The Root Div
+        <Link to="/login" />
       </div>
     );
   }

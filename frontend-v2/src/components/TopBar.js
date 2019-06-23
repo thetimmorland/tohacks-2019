@@ -5,6 +5,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import PropTypes from 'prop-types'
 import SearchIcon from '@material-ui/icons/Search'
 import AccountCircle from '@material-ui/icons/AccountCircle'
+import UserDialog from './UserDialog';
 
 const styles = theme => ({
   root: {
@@ -77,6 +78,14 @@ class TopBar extends React.Component {
     console.log(this.state.searchText)
   }
 
+  userClicked = () => {
+    this.setState({open: true})
+  }
+  
+  handleClose = () => {
+    this.setState({open: false})
+  }
+
   render() {
     const { classes } = this.props
     return (
@@ -99,9 +108,12 @@ class TopBar extends React.Component {
               color="secondary"
             />
           </div>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={this.userClicked}>
               <AccountCircle />
           </IconButton>
+          {
+            this.state.open ? <UserDialog handleClose={this.handleClose} open={this.state.open}/> : null
+          }
         </Toolbar>
       </AppBar>
     )

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from 'axios'
+import { Link } from "@material-ui/core";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class LoginPage extends Component {
     this.state = {
       email: null,
       password: null,
+      loggedIn: false
     }
   }
 
@@ -20,6 +23,15 @@ class LoginPage extends Component {
   passwordChanged = (event) => {
     console.log(event.target.value)
     this.setState({ password: event.target.value })
+  }
+
+  loginClicked = () => {
+    axios.get('http://www.volunteerme.xyz/api/users/6').then(resp => { // revise for token auth
+      this.setState({
+        loggedIn: true,
+        user: resp.data
+      })
+    })
   }
 
   render() {
@@ -49,9 +61,12 @@ class LoginPage extends Component {
           />
         </div>
         <div>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={this.loginClicked}>
             Login
           </Button>
+          {
+            this.state.loggedIn ? <Link to="/home" /> : null
+          }
         </div>
       </div>
     );

@@ -12,7 +12,7 @@ class UserDialog extends React.Component {
                     <Typography>{this.props.user.type}</Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button>Close</Button>
+                    <Button onClick={this.props.handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
         )
