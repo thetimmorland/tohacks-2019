@@ -1,6 +1,6 @@
 FROM node:12.3 AS node-build
 # Copy frontend and backend node apps respectively
-COPY frontend .
+COPY frontend-v2 .
 
 # build frontend
 RUN npm install && npm install -D
