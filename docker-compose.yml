@@ -6,6 +6,7 @@ services:
     ports:
       - "80:8000"
     environment:
+      SECRET: "${SECRET}"
       DB_HOST: "${DB_HOST}"
       DB_USER: "${DB_USER}"
       DB_PASS: "${DB_PASS}"
