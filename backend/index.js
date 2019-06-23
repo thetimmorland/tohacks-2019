@@ -11,20 +11,19 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 const User = require('./models/user').User
 
 // API ENDPOINTS HERE (always lead route with API)
-app.get('/api', function (req, res) {
-    res.send('Hello World!')
-})
-
-User.create({
-    firstName: 'Timbo',
-    lastName: 'More Land',
-    email: 'test@test.com',
-    password: 'hunter2',
-    userType: 'student',
-    interests: 'yeet',
-    skills: 'N/A'
-}).then(user => {
-    console.log(user)
+app.get('/api/register', function (req, res) { // create a fake user example
+    User.create({
+        firstName: 'Timbo',
+        lastName: 'More Land',
+        email: 'test@test.com',
+        password: 'hunter2',
+        userType: 'student',
+        interests: 'yeet',
+        skills: 'N/A'
+    }).then(user => {
+        console.log(user)
+    })
+    res.send('test registration')
 })
 
 // Serve static Frontend dashboard
