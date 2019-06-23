@@ -26,8 +26,13 @@ router.get('/', (req, res) => { // return list of all jobs for all students
 });
 
 router.get('/:id', (req, res) => { // query job by its id
-    
-    res.sendStatus(200);
+    Job.findAll({
+        where: {
+            id: req.params.id
+        }
+    }).then(job => {
+        res.send(job).status(200)
+    })
 });
 
 router.put('/', (req, res) => {
