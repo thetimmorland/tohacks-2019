@@ -5,6 +5,14 @@ const bodyParser = require('body-parser');
 const User = require('./User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const port = 8000
+const dotenv = require('dotenv')
+const mysql = require('mysql')
+const runQuery = require('./db')
+
+if (!process.env.DB_USER || !process.env.DB_PASS) {
+    dotenv.config()
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
@@ -50,8 +58,6 @@ app.get('/me', function (req, res) {
 
         res.status(200).send(user);
     });
-
-});
 
 // Login Endpoint
 app.post('/login', function (req, res) {
@@ -106,6 +112,17 @@ app.get('/verfiywork', (req, res) => {
 app.get('/export', (req, res) => {
     // TODO: generate pdf
     res.status(200);
+});
+
+// API ENDPOINTS HERE (always lead route with API)
+app.get('/api', function (req, res) {
+    res.send('Hello World!')
+})
+
+// Serve static Frontend dashboard
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function(req, res) { // * character allows for internal routing in our frontend
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 const port = 8000
