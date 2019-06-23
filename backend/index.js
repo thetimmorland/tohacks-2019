@@ -29,6 +29,12 @@ app.get('/api/register', function (req, res) { // create a fake user example
     res.send('test registration')
 })
 
+const Posting = require('./models/posting').Posting
+Posting.sync()
+app.get('/api/posting', function (req, res) {
+    res.send('test posting creation')
+})
+
 // Serve static Frontend dashboard
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', function (req, res) { // * character allows for internal routing in our frontend
