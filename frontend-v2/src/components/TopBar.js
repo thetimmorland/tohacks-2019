@@ -112,7 +112,7 @@ class TopBar extends React.Component {
               <AccountCircle />
           </IconButton>
           {
-            this.state.open ? <UserDialog handleClose={this.handleClose} open={this.state.open}/> : null
+            this.state.open ? <UserDialog handleClose={this.handleClose} open={this.state.open} user={this.props.user} /> : null
           }
         </Toolbar>
       </AppBar>

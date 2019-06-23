@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from 'axios'
-import { Link } from "@material-ui/core";
+import { Link, Redirect } from "@material-ui/core";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
 
@@ -26,12 +27,8 @@ class LoginPage extends Component {
   }
 
   loginClicked = () => {
-    axios.get('http://www.volunteerme.xyz/api/users/6').then(resp => { // revise for token auth
-      this.setState({
-        loggedIn: true,
-        user: resp.data
-      })
-    })
+    console.log("click")
+    
   }
 
   render() {
@@ -39,7 +36,7 @@ class LoginPage extends Component {
       <div className="App">
         <div>
           <img src="logo.png" />
-        </div>  
+        </div>
         <div>
           <TextField
             label="Email"
@@ -65,7 +62,11 @@ class LoginPage extends Component {
             Login
           </Button>
           {
-            this.state.loggedIn ? <Link to="/home" /> : null
+            this.state.loggedIn ? <Redirect to={{
+              pathname: '/home',
+              state: { user: this.state.user[0] }
+            }}
+            /> : null
           }
         </div>
       </div>
@@ -73,4 +74,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default Login;

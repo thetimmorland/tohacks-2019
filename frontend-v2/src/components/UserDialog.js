@@ -4,7 +4,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography }
 class UserDialog extends React.Component {
     render() {
         return (
-            <Dialog>
+            <Dialog open={this.props.open}>
                 <DialogTitle>User</DialogTitle>
                 <DialogContent>
                     <Typography>{this.props.user.firstName} {this.props.user.lastName}</Typography>
