@@ -16,7 +16,8 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
-app.use(auth);
+
+app.use('/api/auth', auth);
 
 app.post('/api/users', function (req, res) {
     // create a user
