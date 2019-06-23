@@ -1,6 +1,9 @@
 /frontend/node_modules
 /frontend/build
 
+/frontend-v2/node_modules
+/frontend-v2/build
+
 /backend/node_modules
 /backend/build
 
