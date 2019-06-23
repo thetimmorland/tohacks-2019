@@ -4,9 +4,12 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography }
 class PostInfoDialog extends React.Component {
     render() {
         return (
-            <Dialog>
+            <Dialog open={this.props.open}>
                 <DialogTitle>{this.props.post.title}</DialogTitle>
-                <DialogContent></DialogContent>
+                <DialogContent>
+                    <Typography>{this.props.post.description}</Typography>
+                    <Typography>Contact: {this.props.poster.email}</Typography>
+                </DialogContent>
                 <DialogActions>
                     <Button>Close</Button>
                 </DialogActions>
