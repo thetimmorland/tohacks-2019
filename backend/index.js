@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser')
 const port = 8000
 
 const dotenv = require('dotenv')
@@ -11,32 +12,6 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/api/auth', auth);
-
-app.post('/api/users', function (req, res) {
-    // create a user
-
-    let hashedPassword = bcrypt.hashSync(req.body.password, 8);
-
-    User.create({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        type: req.body.type,
-        payments_assigned : [],
-        password: hashedPassword
-    },
-        function (err, user) {
-            if (err) return res.status(500).send("There was a problem registering the user.")
-
-            // create a token
-            let token = jwt.sign({ id: user._id }, process.env.secret, {
-                expiresIn: 86400 // expires in 24 hours
-            });
-
-            res.status(200).send({ auth: true, token: token });
-        });
-});
 
 // returns user info when their token is enclosed in the header of the request
 app.get('/api/users', function (req, res) {
@@ -57,35 +32,6 @@ app.delete('api/users', function (req, res) {
     // TODO: delete user data (and from relations!)
     res.sendStatus(200);
 })
-
-// Login Endpoint
-app.post('/api/login', function (req, res) {
-
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) return res.status(500).send('Error on the server.');
-        if (!user) return res.status(404).send('No user found.');
-        //console.log(user);
-        let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-        //console.log(passwordIsValid);
-        if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
-
-        let token = jwt.sign({ id: user._id }, process.env.secret, {
-            expiresIn: 86400 // expires in 24 hours
-        });
-
-        res.status(200).send({
-                auth: true,
-                token: token,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                type: user.type,
-                email: user.email,
-                payments_assigned: user.payments_assigned,
-                id: user.id
-            });
-    });
-
-});
 
 app.post('/api/postings', (req, res) => {
     // TODO: create a job posting
@@ -113,7 +59,7 @@ const User = require('./models/user').User
 // API ENDPOINTS HERE (always lead route with API)
 app.get('/api/register', function (req, res) { // create a fake user example
     User.create({
-        firstName: 'Timbo2',
+        firstName: 'Timbo3',
         lastName: 'More Land',
         email: 'test@test.com',
         password: 'hunter2',
