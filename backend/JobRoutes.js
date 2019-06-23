@@ -50,8 +50,14 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/', (req, res) => {
-    
+router.delete('/:id', (req, res) => {
+    Job.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.sendStatus(204)
+    })
 })
 
 module.exports = router;
