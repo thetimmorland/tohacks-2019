@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    container_name: "VolunteerMe"
+    build: .
+    ports:
+      - "80:8000"
+    environment:
+      DB_USER: "${DB_USER}"
+      DB_PASS: "${DB_PASS}"
