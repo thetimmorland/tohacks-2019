@@ -3,18 +3,20 @@ const app = express();
 const path = require('path');
 const port = 8000
 
-
 const dotenv = require('dotenv')
 if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()
 }
+
+const UserRoutes = require('./UserRoutes')
+app.use('/api/users', UserRoutes);
 // import user only after env variables have been enabled
 const User = require('./models/user').User
 
 // API ENDPOINTS HERE (always lead route with API)
 app.get('/api/register', function (req, res) { // create a fake user example
     User.create({
-        firstName: 'Timbo2',
+        firstName: 'Timbo4',
         lastName: 'More Land',
         email: 'test@test.com',
         password: 'hunter2',
