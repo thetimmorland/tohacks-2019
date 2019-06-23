@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 const Posting = require('./models/posting').Posting
+const Levenshtein = require('levenshtein');
 
 // router.get, router.post etc....
 router.get('/', (req, res) => {
@@ -25,10 +26,16 @@ router.get('/:post_id', (req, res) => {
 router.get('/search/:query', (req, res) => {
     console.log("here")
     console.log(req.params.query)
-    Posting.findAll().then(postings => postings.sort((a,b) =>
-            (!a.title || !b.title) ? 1000 :
-                new Levenshtein(a.title, req.params.query).distance
-                    - new Levenshtein(b.title, req.params.query).distance)
+    Posting.findAll().then(postings => postings.sort((textA,textB) => {
+            let as_ = (textA.title + textA.description).split(" ");
+            let bs = (textB.title + textB.description).split(" ");
+            
+            return as_.map(a => bs.map(b =>
+                new Levenshtein(a, req.params.query).distance
+                    - new Levenshtein(b, req.params.query).distance))
+                    .reduce((acc,curr) => acc<curr ? acc : curr, 0)
+                .reduce((acc,curr) => acc<curr ? acc : curr, 0)
+        })
         .slice(0, 10))
     .then(postings => res.status(200).send(postings));
 })
