@@ -1,4 +1,6 @@
+const getConnection = require('../db').getConnection
 const Sequelize = require('sequelize')
+const sequelize = getConnection()
 
 class User extends Sequelize.Model {}
 
@@ -28,3 +30,7 @@ User.init({
     sequelize,
     modelName: 'user'
 })
+
+module.exports = {
+    User: User
+}
