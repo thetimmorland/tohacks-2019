@@ -4,6 +4,7 @@ const app = express()
 const port = 8000
 const dotenv = require('dotenv')
 const mysql = require('mysql')
+const dbutil = require('./db')
 
 if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()
@@ -13,8 +14,6 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 app.get('/api', function (req, res) {
     res.send('Hello World!')
 })
-
-// Select all users and return as JSON
 
 // Serve static Frontend dashboard
 app.use(express.static(path.join(__dirname, 'build')));
