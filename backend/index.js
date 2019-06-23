@@ -36,13 +36,13 @@ app.get('/api/register', function (req, res) { // create a fake user example
 })
 
 const Posting = require('./models/posting').Posting
-Posting.sync()
+//Posting.sync()
 app.get('/api/posting', function (req, res) {
     res.send('test posting creation')
 })
 
 const Job = require('./models/job').Job
-Job.sync()
+//Job.sync()
 app.get('/api/jobs', function (req, res) {
     res.send('test job creation')
 })
