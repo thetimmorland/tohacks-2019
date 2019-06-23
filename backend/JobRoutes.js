@@ -14,12 +14,18 @@ router.post('/', (req, res) => {
         description: req.body.description,
         postingID: req.body.postingID,
         studentID: req.body.studentID
+    }).then(job => {
+        res.sendStatus(204) // 204 created
     })
+});
+
+router.get('/', (req, res) => { // return list of all jobs for all students
+    
     res.sendStatus(200);
 });
 
-router.get('/', (req, res) => {
-    // TODO: return all jobs that match query params
+router.get('/:id', (req, res) => { // query job by its id
+    
     res.sendStatus(200);
 });
 
