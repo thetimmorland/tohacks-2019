@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const port = 8000
 const dotenv = require('dotenv')
 const runQuery = require('./db')
+const auth = require('./AuthController')
 
 if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()
@@ -15,6 +16,7 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
+app.use(auth);
 
 app.get('/loginPage', function(req, res) {
   res.sendFile(path.join("../frontend/", 'build', 'index.html'));
