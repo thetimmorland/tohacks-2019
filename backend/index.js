@@ -4,7 +4,7 @@ const app = express()
 const port = 8000
 const dotenv = require('dotenv')
 const mysql = require('mysql')
-const dbutil = require('./db')
+const runQuery = require('./db')
 
 if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()

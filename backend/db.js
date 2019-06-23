@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
     password : process.env.DB_PASS,
 });
 
-export function runQuery(query, callback) {
+function runQuery(query, callback) {
     connection.connect()
     console.log(connection)
     connection.query(q, function (error, results, fields) {
@@ -15,3 +15,5 @@ export function runQuery(query, callback) {
     })
     connection.end()
 }
+
+module.exports = runQuery
