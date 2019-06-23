@@ -1,15 +1,9 @@
 const express = require('express')
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser');
-const User = require('./User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const port = 8000
-const dotenv = require('dotenv')
-const runQuery = require('./db')
-const auth = require('./AuthController')
 
+const dotenv = require('dotenv')
 if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()
 }
@@ -113,10 +107,29 @@ app.get('/api/jobs', (req, res) => {
 //     res.sendStatus(200);
 // });
 
+// import user only after env variables have been enabled
+const User = require('./models/user').User
+
+// API ENDPOINTS HERE (always lead route with API)
+app.get('/api/register', function (req, res) { // create a fake user example
+    User.create({
+        firstName: 'Timbo2',
+        lastName: 'More Land',
+        email: 'test@test.com',
+        password: 'hunter2',
+        userType: 'student',
+        interests: 'yeet',
+        skills: 'N/A'
+    }).then(user => {
+        console.log(user)
+    })
+    res.send('test registration')
+})
+
 // Serve static Frontend dashboard
 app.use(express.static(path.join(__dirname, 'build')));
-app.get('/*', function(req, res) { // * character allows for internal routing in our frontend
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/*', function (req, res) { // * character allows for internal routing in our frontend
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port, () => console.log(`VolunteerMe listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
