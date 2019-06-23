@@ -22,6 +22,16 @@ router.get('/:post_id', (req, res) => {
     }).then(model => res.send(model));
 });
 
+router.get('/search/:query', (req, res) => {
+    console.log("here")
+    console.log(req.params.query)
+    Posting.findAll().then(postings => postings.sort((a,b) =>
+            (!a.title || !b.title) ? 1000 :
+                new Levenshtein(a.title, req.params.query).distance
+                    - new Levenshtein(b.title, req.params.query).distance)
+        .slice(0, 10))
+    .then(postings => res.status(200).send(postings));
+})
 
 router.put('/:post_id', (req, res) => {
     Posting.update(req.body, {
