@@ -7,4 +7,9 @@ const User = require('./models/user').User
 
 // router.get, router.post etc....
 
+router.post('/api/postings', (req, res) => {
+    // TODO: create a job posting
+    res.sendStatus(200);
+});
+
 module.exports = router;

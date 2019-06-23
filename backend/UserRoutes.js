@@ -25,21 +25,6 @@ router.delete('api/users', function (req, res) {
     res.sendStatus(200);
 })
 
-router.post('/api/postings', (req, res) => {
-    // TODO: create a job posting
-    res.sendStatus(200);
-});
-
-router.post('/api/jobs', (req, res) => {
-    // TODO: record that student did work
-    res.sendStatus(200);
-});
-
-router.get('/api/jobs', (req, res) => {
-    // TODO: return all jobs that match query params
-    res.sendStatus(200);
-});
-
 // router.get('/api/export', (req, res) => {
 //     // TODO: generate pdf
 //     res.sendStatus(200);
