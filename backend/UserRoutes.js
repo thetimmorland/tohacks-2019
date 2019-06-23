@@ -5,24 +5,62 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 const User = require('./models/user').User
 
-// returns user info when their token is enclosed in the header of the request
-router.get('/api/users', function (req, res) {
-    User.findById(req.userId, { password: 0 }, function (err, user) {
-        if (err) return res.status(500).send("There was a problem finding the user.");
-        if (!user) return res.status(404).send("No user found.");
+router.post('/', function (req, res) {
+    let body = req.body;
+    if(!body.firstName || !body.lastName || !body.email || !body.password || !body.userType || !body.interests || !body.skills) {
+        res.status(400).send("Missing Data");
+    }
+    User.create({
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        password: body.password,
+        userType: body.userType,
+        interests: body.interests,
+        skills: body.skills,
+    }).then(user => {
+        res.status(200).send({ id: user.id });
+    });
+})
 
-        res.status(200).send(user);
+router.get('/', function (req, res) {
+    User.findAll().then(users => {
+        res.status(200).send(users);
     });
 });
 
-router.put('api/users', function (req, res) {
-    // TODO: update user data
-    res.sendStatus(200);
+router.put('/:id', function (req, res) {
+    let body = req.body;
+    console.log(req);
+    if(!body.firstName || !body.lastName || !body.email || !body.password || !body.userType || !body.interests || !body.skills || !req.params.id) {
+        res.status(400).send("Missing Data");
+    }
+
+    User.update({
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        password: body.password,
+        userType: body.userType,
+        interests: body.interests,
+        skills: body.skills,
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.sendStatus(200);
+    });
 });
 
-router.delete('api/users', function (req, res) {
-    // TODO: delete user data (and from relations!)
-    res.sendStatus(200);
+router.delete('/:id', function (req, res) {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.sendStatus(200);
+    });
 })
 
 // router.get('/api/export', (req, res) => {
