@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const port = 8000
 const dotenv = require('dotenv')
-const mysql = require('mysql')
 const runQuery = require('./db')
 
 if (!process.env.DB_USER || !process.env.DB_PASS) {
@@ -58,6 +57,7 @@ app.get('/me', function (req, res) {
 
         res.status(200).send(user);
     });
+});
 
 // Login Endpoint
 app.post('/login', function (req, res) {
@@ -125,5 +125,4 @@ app.get('/*', function(req, res) { // * character allows for internal routing in
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-const port = 8000
 app.listen(port, () => console.log(`VolunteerMe listening on port ${port}!`))
