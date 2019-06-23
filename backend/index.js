@@ -16,7 +16,8 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
-app.use(auth);
+
+app.use('/api/auth', auth);
 
 app.get('/loginPage', function(req, res) {
   res.sendFile(path.join("../frontend/", 'build', 'index.html'));
