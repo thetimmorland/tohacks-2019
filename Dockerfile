@@ -9,6 +9,6 @@ RUN npm install react-scripts && npm run build
 FROM node:12.3
 COPY backend .
 RUN npm install && npm install -D
-COPY --from=node-build /build /dashboard
+COPY --from=node-build /build /build
 
 CMD node index.js
