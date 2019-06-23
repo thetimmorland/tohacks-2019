@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser')
 const port = 8000
 
 const dotenv = require('dotenv')
@@ -9,57 +8,15 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
     dotenv.config()
 }
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
-
-
-// returns user info when their token is enclosed in the header of the request
-app.get('/api/users', function (req, res) {
-    User.findById(req.userId, { password: 0 }, function (err, user) {
-        if (err) return res.status(500).send("There was a problem finding the user.");
-        if (!user) return res.status(404).send("No user found.");
-
-        res.status(200).send(user);
-    });
-});
-
-app.put('api/users', function (req, res) {
-    // TODO: update user data
-    res.sendStatus(200);
-});
-
-app.delete('api/users', function (req, res) {
-    // TODO: delete user data (and from relations!)
-    res.sendStatus(200);
-})
-
-app.post('/api/postings', (req, res) => {
-    // TODO: create a job posting
-    res.sendStatus(200);
-});
-
-app.post('/api/jobs', (req, res) => {
-    // TODO: record that student did work
-    res.sendStatus(200);
-});
-
-app.get('/api/jobs', (req, res) => {
-    // TODO: return all jobs that match query params
-    res.sendStatus(200);
-});
-
-// app.get('/api/export', (req, res) => {
-//     // TODO: generate pdf
-//     res.sendStatus(200);
-// });
-
+const UserRoutes = require('./UserRoutes')
+app.use('/api/users', UserRoutes);
 // import user only after env variables have been enabled
 const User = require('./models/user').User
 
 // API ENDPOINTS HERE (always lead route with API)
 app.get('/api/register', function (req, res) { // create a fake user example
     User.create({
-        firstName: 'Timbo3',
+        firstName: 'Timbo4',
         lastName: 'More Land',
         email: 'test@test.com',
         password: 'hunter2',
