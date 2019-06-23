@@ -35,8 +35,23 @@ router.get('/:id', (req, res) => { // query job by its id
     })
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
+    Job.update({
+        hoursCompleted: req.body.hoursCompleted,
+        description: req.body.description,
+        postingID: req.body.postingID,
+        studentID: req.body.studentID
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.sendStatus(204)
+    })
+})
 
+router.delete('/', (req, res) => {
+    
 })
 
 module.exports = router;
