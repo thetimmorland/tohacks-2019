@@ -1,9 +1,13 @@
 import React from 'react'
+import TopBar from '../components/TopBar'
+
 
 class HomePage extends React.Component {
     render() {
         return (
-            <div>This is the Home Page</div>
+            <div>
+                <TopBar />
+            </div>
         )
     }
 }
