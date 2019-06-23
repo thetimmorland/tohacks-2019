@@ -1,27 +1,24 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import React from 'react'
+import { AppBar, Toolbar, Typography, InputBase, IconButton } from '@material-ui/core'
+import { withStyles, createMuiTheme } from '@material-ui/core/styles'
+import { fade } from '@material-ui/core/styles/colorManipulator'
+import PropTypes from 'prop-types'
+import SearchIcon from '@material-ui/icons/Search'
+import AccountCircle from '@material-ui/icons/AccountCircle'
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
+    width: '100%',
+  },
+  grow: {
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginLeft: -12,
+    marginRight: 20,
   },
   title: {
-    flexGrow: 1,
     display: 'none',
-    textAlign: 'left',
-    marginLeft: '5px',
-    marginRight: '30px', 
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -33,15 +30,16 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    
+    marginRight: theme.spacing.unit * 2,
+    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
+      marginLeft: theme.spacing.unit * 60,
       width: 'auto',
     },
   },
   searchIcon: {
-    width: theme.spacing(7),
+    width: theme.spacing.unit * 9,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -49,42 +47,42 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    
-  },
   inputRoot: {
     color: 'inherit',
+    width: '100%',
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 10),
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 160,
-      '&:focus': {
-        width: 240,
-      },
+    [theme.breakpoints.up('md')]: {
+      width: 200,
     },
   },
-}));
+})
 
-export default function SearchAppBar() {
-  const classes = useStyles();
+class TopBar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
+  handleChange = (event) => {
+    this.setState({
+      searchText: event.target.value
+    })
+    console.log(this.state.searchText)
+  }
+
+  render() {
+    const { classes } = this.props
+    return (
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography variant="h6">
             VolunteerMe
           </Typography>
           <div className={classes.search}>
@@ -93,16 +91,25 @@ export default function SearchAppBar() {
             </div>
             <InputBase
               placeholder="Search…"
+              onChange={this.handleChange}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ 'aria-label': 'Search' }}
+              color="secondary"
             />
           </div>
-          <IconButton color="inherit"><AccountCircle/></IconButton>
+          <IconButton color="inherit">
+              <AccountCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    )
+  }
 }
+
+TopBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(TopBar)
