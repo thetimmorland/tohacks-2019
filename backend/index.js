@@ -10,6 +10,12 @@ if (!process.env.DB_USER || !process.env.DB_PASS) {
 
 const UserRoutes = require('./UserRoutes')
 app.use('/api/users', UserRoutes);
+
+const PostingRoutes = require('./PostingRoutes')
+app.use('/api/postings', PostingRoutes)
+
+const JobRoutes = require('./JobRoutes')
+app.use('/api/jobs', JobRoutes)
 // import user only after env variables have been enabled
 const User = require('./models/user').User
 
