@@ -24,9 +24,9 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <form noValidate autoComplete="off">
+      <div className="App">
         <div>
-          <img src="logo.png"></img>
+          <img src="logo.png" />
         </div>  
         <div>
           <TextField
@@ -49,11 +49,11 @@ class LoginPage extends Component {
           />
         </div>
         <div>
-          <Button variant="contained" color="primary" onClick={this.props.handler}>
+          <Button variant="contained" color="primary">
             Login
           </Button>
         </div>
-      </form>
+      </div>
     );
   }
 }
