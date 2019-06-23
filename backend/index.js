@@ -18,12 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());app.use(express.static(path.join(__dirname, 'build')));
 app.use(auth);
 
-app.get('/loginPage', function(req, res) {
-  res.sendFile(path.join("../frontend/", 'build', 'index.html'));
-});
-
-// registration endpoint
-app.post('/register', function (req, res) {
+app.post('/api/users', function (req, res) {
+    // create a user
 
     let hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
@@ -48,11 +44,7 @@ app.post('/register', function (req, res) {
 });
 
 // returns user info when their token is enclosed in the header of the request
-app.get('/me', function (req, res) {
-
-    // find token in db
-
-    // this is bad because we could ask for a different user
+app.get('/api/users', function (req, res) {
     User.findById(req.userId, { password: 0 }, function (err, user) {
         if (err) return res.status(500).send("There was a problem finding the user.");
         if (!user) return res.status(404).send("No user found.");
@@ -61,8 +53,18 @@ app.get('/me', function (req, res) {
     });
 });
 
+app.put('api/users', function (req, res) {
+    // TODO: update user data
+    res.sendStatus(200);
+});
+
+app.delete('api/users', function (req, res) {
+    // TODO: delete user data (and from relations!)
+    res.sendStatus(200);
+})
+
 // Login Endpoint
-app.post('/login', function (req, res) {
+app.post('/api/login', function (req, res) {
 
     User.findOne({ email: req.body.email }, function (err, user) {
         if (err) return res.status(500).send('Error on the server.');
@@ -90,36 +92,25 @@ app.post('/login', function (req, res) {
 
 });
 
-// Logout that nullifies token given in login endpoint
-app.get('/logout', function (req, res) {
-    res.status(200).send({ auth: false, token: null });
-});
-// ^ waaaaat
-
-app.get('/create', (req, res) => {
+app.post('/api/postings', (req, res) => {
     // TODO: create a job posting
-    res.status(200);
+    res.sendStatus(200);
 });
 
-app.get('/signup', (req, res) => {
-    // TODO: sign up student for a job posting
-    res.status(200);
-});
-
-app.get('/verfiywork', (req, res) => {
+app.post('/api/jobs', (req, res) => {
     // TODO: record that student did work
-    res.status(200);
+    res.sendStatus(200);
 });
 
-app.get('/export', (req, res) => {
-    // TODO: generate pdf
-    res.status(200);
+app.get('/api/jobs', (req, res) => {
+    // TODO: return all jobs that match query params
+    res.sendStatus(200);
 });
 
-// API ENDPOINTS HERE (always lead route with API)
-app.get('/api', function (req, res) {
-    res.send('Hello World!')
-})
+// app.get('/api/export', (req, res) => {
+//     // TODO: generate pdf
+//     res.sendStatus(200);
+// });
 
 // Serve static Frontend dashboard
 app.use(express.static(path.join(__dirname, 'build')));

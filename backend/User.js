@@ -20,6 +20,8 @@
 //     ORG VARCHAR(255),
 //     INTERESTS VARCHAR(255),
 //     SKILLS VARCHAR(255),
+//     FirstName ...,
+//     LastName ....,
 //     ID int NOT NULL PRIMARY KEY auto_increment
 //     )
 
