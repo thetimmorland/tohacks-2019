@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-class RegisterPage extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
 
@@ -75,4 +75,4 @@ class RegisterPage extends Component {
     );
   }
 }
-export default RegisterPage;
+export default Profile;

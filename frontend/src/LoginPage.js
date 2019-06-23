@@ -26,6 +26,9 @@ class LoginPage extends Component {
     return (
       <form noValidate autoComplete="off">
         <div>
+          <img src="logo.png"></img>
+        </div>  
+        <div>
           <TextField
             label="Email"
             type="email"
