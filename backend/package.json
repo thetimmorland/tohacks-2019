@@ -9,6 +9,7 @@
   "author": "Andrew Fryer, Nathan Lai, Timothy Morland & Ethan Peterson",
   "license": "ISC",
   "dependencies": {
+    "account": "^1.0.0",
     "express": "^4.17.1"
   }
 }
