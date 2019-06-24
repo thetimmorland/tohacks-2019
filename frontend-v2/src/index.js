@@ -12,14 +12,15 @@ import HomePage from './containers/HomePage'
 import RegisterPage from './containers/RegisterPage'
 
 const routing = (
-  <Router>
-    <div>
-      <Route exact path="/" component={App} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/home" component={HomePage} />
-      <Route path="/register" component={RegisterPage} />
-    </div>
-  </Router>
+  <App>
+    <Router>
+      <div>
+        <Route exact path="/" component={LoginPage} />
+        <Route path="/home" component={HomePage} />
+        <Route path="/register" component={RegisterPage} />
+      </div>
+    </Router>
+  </App>
 )
 
 ReactDOM.render(

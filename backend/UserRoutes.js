@@ -29,6 +29,16 @@ router.get('/', function (req, res) {
     });
 });
 
+router.get('/:id', function (req, res) {
+    User.findAll({
+        where: {
+            id: req.params.id
+        }
+    }).then(users => {
+        res.status(200).send(users);
+    });
+});
+
 router.put('/:id', function (req, res) {
     let body = req.body;
     console.log(req);
