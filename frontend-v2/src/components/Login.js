@@ -35,7 +35,7 @@ class Login extends Component {
     return (
       <div className="App">
         <div>
-          <img src="logo.png" />
+          <img height="25%" width="25%" src="Logo.png"/>
         </div>
         <div>
           <TextField
