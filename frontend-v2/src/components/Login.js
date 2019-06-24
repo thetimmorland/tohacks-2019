@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from 'axios'
+import { Link, Redirect } from "@material-ui/core";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
-class LoginPage extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       email: null,
       password: null,
+      loggedIn: false
     }
   }
 
@@ -22,12 +26,17 @@ class LoginPage extends Component {
     this.setState({ password: event.target.value })
   }
 
+  loginClicked = () => {
+    console.log("click")
+    
+  }
+
   render() {
     return (
       <div className="App">
         <div>
           <img src="logo.png" />
-        </div>  
+        </div>
         <div>
           <TextField
             label="Email"
@@ -49,13 +58,20 @@ class LoginPage extends Component {
           />
         </div>
         <div>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={this.loginClicked}>
             Login
           </Button>
+          {
+            this.state.loggedIn ? <Redirect to={{
+              pathname: '/home',
+              state: { user: this.state.user[0] }
+            }}
+            /> : null
+          }
         </div>
       </div>
     );
   }
 }
 
-export default LoginPage;
+export default Login;

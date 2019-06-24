@@ -18,6 +18,32 @@
   font-size: large;
 }
 
+.Green {
+  background: green;
+}
+
+.Red {
+  background: red;
+}
+
+.flexcontainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.Left {
+  margin-left: 50px;
+  width: 50%;
+  padding: 10%;
+  float: left;
+}
+
+.Right {
+  margin-left: 150px;
+  width: 40%;
+  float: right;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
