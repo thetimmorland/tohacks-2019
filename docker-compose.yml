@@ -1,14 +1,38 @@
-version: '3'
+version: "3"
+
 services:
-  app:
-    container_name: "VolunteerMe"
-    build: .
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "80:8000"
+      - 3306:3306
     environment:
-      SECRET: "${SECRET}"
-      DB_NAME: "${DB_NAME}"
-      DB_HOST: "${DB_HOST}"
-      DB_USER: "${DB_USER}"
-      DB_PASS: "${DB_PASS}"
-      DB_HOST: "${DB_HOST}"
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: testing.Dockerfile
+    volumes:
+      - ./backend:/src
+    ports:
+      - 8000:8000
+    environment:
+      - SECRET
+      - API_PORT
+      - DB_USER
+      - DB_PASS
+      - DB_HOST
+      - DB_TABLE
+
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: testing.Dockerfile
+    volumes:
+      - ./frontend:/src
+    ports:
+      - 3000:3000
+    environment:
+      - API_HOST
+      - API_PORT
