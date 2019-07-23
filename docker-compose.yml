@@ -16,9 +16,8 @@ services:
     volumes:
       - ./api:/src
     ports:
-      - 8000:8000
+      - ${API_PORT}:${API_PORT}
     environment:
-      - PORT=${WEB_APP_PORT}
       - SECRET
       - API_PORT
       - DB_USER
@@ -33,7 +32,8 @@ services:
     volumes:
       - ./web-app:/src
     ports:
-      - 3000:3000
+      - ${WEB_APP_PORT}:${WEB_APP_PORT}
     environment:
+      - PORT=${WEB_APP_PORT}
       - API_HOST
       - API_PORT

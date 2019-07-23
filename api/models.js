@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
-const sequelize = getConnection();
+const sequelize = require('./db');
 
-class User extends Sequelize.Model {}
-User.init(
+const User = sequelize.define(
+    'user',
     {
         firstName: Sequelize.STRING,
         lastName: Sequelize.STRING,
@@ -12,41 +12,26 @@ User.init(
         interests: Sequelize.STRING,
         skills: Sequelize.STRING,
     },
-
-    {
-        sequelize,
-        modelName: 'user',
-    },
 );
 
-class Job extends Sequelize.Model {}
-Job.init(
+const Job = sequelize.define(
+    'job',
     {
         hoursCompleted: Sequelize.INTEGER,
         description: Sequelize.STRING,
         postingID: Sequelize.INTEGER,
         studentID: Sequelize.INTEGER,
     },
-
-    {
-        sequelize,
-        modelName: 'job',
-    },
 );
 
-class Posting extends Sequelize.Model {}
-Posting.init(
+const Posting = sequelize.define(
+    'posting',
     {
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         org: Sequelize.STRING,
         userID: Sequelize.INTEGER,
     },
-
-    {
-        sequelize,
-        modelName: 'posting',
-    }
 );
 
 module.exports = {
