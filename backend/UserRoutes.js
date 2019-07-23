@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
-const User = require('./models/user').User
+const User = require('./models/user').User;
 
 router.post('/', function (req, res) {
     let body = req.body;
@@ -11,7 +11,8 @@ router.post('/', function (req, res) {
         res.status(400).send("Missing Data");
     }
     User.create({
-        firstName: body.firstName,
+        firstName: body.firstName
+        ,
         lastName: body.lastName,
         email: body.email,
         password: body.password,
