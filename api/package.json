@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "volunteerme-api",
   "version": "1.0.0",
   "description": "VolunteerMe Backend Server",
   "main": "index.js",
