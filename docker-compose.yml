@@ -18,6 +18,7 @@ services:
     ports:
       - 8000:8000
     environment:
+      - PORT=${WEB_APP_PORT}
       - SECRET
       - API_PORT
       - DB_USER
