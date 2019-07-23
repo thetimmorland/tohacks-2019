@@ -9,12 +9,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASS}
 
-  backend:
+  api:
     build:
-      context: ./backend/
+      context: ./api/
       dockerfile: testing.Dockerfile
     volumes:
-      - ./backend:/src
+      - ./api:/src
     ports:
       - 8000:8000
     environment:
@@ -25,12 +25,12 @@ services:
       - DB_HOST
       - DB_TABLE
 
-  frontend:
+  web-app:
     build:
-      context: ./frontend/
+      context: ./web-app/
       dockerfile: testing.Dockerfile
     volumes:
-      - ./frontend:/src
+      - ./web-app:/src
     ports:
       - 3000:3000
     environment:
