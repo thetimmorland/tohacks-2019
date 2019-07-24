@@ -8,7 +8,7 @@ const db = {};
 
 let sequelize;
 sequelize = new Sequelize(
-    processs.env.DB_TABLE,
+    process.env.DB_TABLE,
     process.env.DB_USER,
     process.env.DB_PASS,
     {
