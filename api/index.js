@@ -1,15 +1,13 @@
-// setup app object
 const express = require('express');
 const app = express();
 
-const JobRoutes = require('./JobRoutes');
-app.use('/api/jobs', JobRoutes);
+const users = require('./routes/users');
+const jobs = require('./routes/jobs');
+const postings = require('./routes/postings');
 
-const UserRoutes = require('./UserRoutes');
-app.use('/api/users', UserRoutes);
-
-const PostingRoutes = require('./PostingRoutes');
-app.use('/api/postings', PostingRoutes);
+app.use('/api/jobs', jobs);
+app.use('/api/users', users);
+app.use('/api/postings', postings);
 
 app.listen(process.env.API_PORT);
 app.get('/', (req, res) => res.send('Hello World'));
