@@ -16,11 +16,11 @@
     "levenshtein": "^1.0.5",
     "mysql": "^2.17.1",
     "mysql2": "^1.6.5",
-    "nodemon": "^1.19.1",
     "sequelize": "^5.8.12"
   },
   "devDependencies": {
     "cors": "^2.8.5",
+    "nodemon": "^1.19.1",
     "sequelize-cli": "^5.5.0"
   }
 }
