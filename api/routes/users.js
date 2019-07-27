@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-const User = require('./models').User;
+const User = require('../models').User;
 
 router.post('/', function (req, res) {
     let body = req.body;

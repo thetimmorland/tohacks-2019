@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-const Posting = require('./models').Posting
+const Posting = require('../models').Posting
 const Levenshtein = require('levenshtein');
 
 // router.get, router.post etc....

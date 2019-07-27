@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const JobPosting = sequelize.define('JobPosting', {
+  const Job = sequelize.define('Job', {
     title: DataTypes.STRING,
     description: DataTypes.STRING
   }, {});
-  JobPosting.associate = function(models) {
+  Job.associate = function(models) {
     // associations can be defined here
   };
-  return JobPosting;
+  return Job;
 };
