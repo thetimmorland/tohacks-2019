@@ -4,13 +4,15 @@ sequelize.sync();
 const express = require('express');
 const app = express();
 
-const users = require('./routes/users');
-const jobs = require('./routes/jobs');
-const postings = require('./routes/postings');
+const fs = require('fs');
+const path = require('path');
+const routesdir = path.resolve(__dirname, 'routes');
 
-app.use('/api/jobs', jobs);
-app.use('/api/users', users);
-app.use('/api/postings', postings);
+fs.readdirSync(routesdir)
+  .forEach(route => {
+    app.use(
+      path.resolve('/api', path.parse(route).name),
+     require(path.resolve(routesdir, route)));
+  });
 
 app.listen(process.env.API_PORT);
-app.get('/', (req, res) => res.send('Hello World'));
