@@ -9,8 +9,14 @@ module.exports = (sequelize, DataTypes, uuid) => {
       allowNull: false,
       defaultValue: () => uuidv4(),
     },
-    name: DataTypes.STRING,
-    description: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {});
 
   Posting.associate = function(models) {
