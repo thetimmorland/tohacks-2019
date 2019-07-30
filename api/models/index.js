@@ -9,7 +9,7 @@ const db = {};
 let sequelize;
 sequelize = new Sequelize(
   process.env.DB_URL,
-  { logging: false },
+  { password: process.env.DB_PASS },
 );
 
 fs
