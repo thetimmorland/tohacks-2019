@@ -1,6 +1,7 @@
 'use strict';
 const uuidv4 = require('uuid/v4');
 
+// Contains data about completed volunteer work
 module.exports = (sequelize, DataTypes) => {
   const Log = sequelize.define(
     'Log',

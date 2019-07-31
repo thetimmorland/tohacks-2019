@@ -1,6 +1,8 @@
 'use strict';
 const uuidv4 = require('uuid/v4');
 
+// contains authentication for organization accounts, as well as references to
+// their job postings
 module.exports = (sequelize, DataTypes) => {
   const Organization = sequelize.define(
     'Organization',

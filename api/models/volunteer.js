@@ -1,6 +1,8 @@
 'use strict';
 const uuidv4 = require('uuid/v4');
 
+// Contains authentication information for volunteer accounts, as well as
+// references to their work logs
 module.exports = (sequelize, DataTypes) => {
   const Volunteer = sequelize.define(
     'Volunteer',
