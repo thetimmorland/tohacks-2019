@@ -12,7 +12,7 @@ fs.readdirSync(routesdir)
   .forEach(route => {
     app.use(
       path.resolve('/api', path.parse(route).name),
-     require(path.resolve(routesdir, route)));
+      require(path.resolve(routesdir, route)));
   });
 
 app.listen(process.env.API_PORT);
